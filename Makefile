@@ -2,6 +2,7 @@ CC := g++ # this is the main compiler
 # CC := clange --analyze # and comment out the linker last line
 SRCDIR := src
 BUILDDIR := build
+TARGETDIR := bin
 TARGET := bin/CardEval
 
 SRCEXT := cpp
@@ -13,9 +14,11 @@ INC := -I include
 
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
+	@mkdir -p $(TARGETDIR)
 	@echo " $(CC) $^ -o $(TARGET) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIB)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
+	@echo " Building..."
 	@mkdir -p $(BUILDDIR)
 	@echo " $(CC) $(CFLAGS) $(INC) -c -o $@ $<"; $(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
