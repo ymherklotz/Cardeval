@@ -1,2 +1,6 @@
+# ignore these directories
 build/
 bin/
+
+# ignore .swp file extension
+*.swp
