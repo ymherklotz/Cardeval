@@ -8,19 +8,20 @@ TARGET := bin/CardEval
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-CFLAGS := -g # -Wall
-LIB := 
-INC := -I include
+CFLAGS := -g -std=c++14 # -Wall
+LIBDIR := -L/usr/local/lib64/
+LIB := -ltinyxml2
+INC := -Iinclude/
 
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
 	@mkdir -p $(TARGETDIR)
-	@echo " $(CC) $^ -o $(TARGET) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIB)
+	@echo " $(CC) $^ -o $(TARGET) $(LIBDIR) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIBDIR) $(LIB)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@echo " Building..."
 	@mkdir -p $(BUILDDIR)
-	@echo " $(CC) $(CFLAGS) $(INC) -c -o $@ $<"; $(CC) $(CFLAGS) $(INC) -c -o $@ $<
+	@echo " $(CC) $< $(CFLAGS) $(INC) -c -o $@"; $(CC) $< $(CFLAGS) $(INC) -c -o $@
 
 clean:
 	@echo " Cleaning..."
