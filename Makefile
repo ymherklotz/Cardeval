@@ -1,5 +1,5 @@
 CC := g++ # this is the main compiler
-# CC := clange --analyze # and comment out the linker last line
+# CC := clang --analyze # and comment out the linker last line
 SRCDIR := src
 BUILDDIR := build
 TARGETDIR := bin
@@ -8,7 +8,7 @@ TARGET := bin/CardEval
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-CFLAGS := -g -std=c++14 # -Wall
+CFLAGS := -g -std=c++14 -Wall
 LIBDIR := -L/usr/local/lib64/
 LIB := -ltinyxml2
 INC := -Iinclude/
